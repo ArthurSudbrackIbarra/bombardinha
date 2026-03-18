@@ -1,10 +1,11 @@
 # Bombardinha
 
-Tutorial:
-
 ```bash
 # Install Poetry.
-pip install poetry
+# Windows:
+# (Invoke-WebRequest -Uri https://install.python-poetry.org -UseBasicParsing).Content | py -
+# Linux and macOS:
+# curl -sSL https://install.python-poetry.org | python3 -
 
 # Initialize the project.
 poetry install
