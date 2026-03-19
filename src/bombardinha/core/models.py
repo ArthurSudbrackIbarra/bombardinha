@@ -14,10 +14,12 @@ class Note:
         name: str,
         duration: NoteDuration = NoteDuration.NORMAL,
         is_connected: bool = False,
+        is_breath: bool = False,
     ):
         self.name = name
         self.duration = duration
         self.is_connected = is_connected
+        self.is_breath = is_breath
 
 
 class Part:

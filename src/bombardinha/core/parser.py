@@ -88,13 +88,16 @@ class BombaParser:
                 for raw in raw_notes:
                     duration = NoteDuration.NORMAL
                     is_connected = False
+                    is_breath = False
                     chunk = raw
 
-                    # Check and strip attributes (Order doesn't matter: C_- or C-_).
+                    # Check and strip attributes (order doesn't matter: C_- or C-_).
                     if "-" in chunk:
                         is_connected = True
                         chunk = chunk.replace("-", "")
-
+                    if "," in chunk:
+                        is_breath = True
+                        chunk = chunk.replace(",", "")
                     if "_" in chunk:
                         duration = NoteDuration.LONG
                         chunk = chunk.replace("_", "")
@@ -119,7 +122,7 @@ class BombaParser:
 
                         note_name = f"{base}{accidental}{octave}"
                         part_blueprints[current_section_id].append(
-                            Note(note_name, duration, is_connected)
+                            Note(note_name, duration, is_connected, is_breath)
                         )
                     else:
                         print(

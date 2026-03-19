@@ -22,8 +22,9 @@ The project uses a reduced notation system to represent how notes should be play
 - **Normal**: No symbol is added. This is the default state.
 - **Long (\_)**: Indicated by an underscore (e.g., `G_`). In the PDF, these notes have a horizontal bar below them, indicating the note should be held.
 - **Connected (-)**: Indicated by a hyphen (e.g., `D-`). This represents a "ligature" or "slur," telling the player to transition quickly between notes in a fast chain. In the PDF, this is visualized with an arc connecting the notes.
+- **Breath Mark (,)**: Indicated by a comma (e.g., `C,`). This indicates a breath mark, signaling the player to take a breath at that point. In the PDF, this is represented by a small letter "R" placed to the right of the note.
 
-Symbols can be combined. For example, `C_-` represents a note that is both long and connected to the next.
+Symbols can be combined. For example, `C_,` represents a note that should be held and followed by a breath mark.
 
 ## File Syntax (.bomba)
 

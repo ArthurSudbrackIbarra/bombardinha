@@ -95,6 +95,14 @@ class EuphoniumRenderer:
         elif note.duration == NoteDuration.SHORT:
             self.c.circle(x, y + 31, 1, fill=1, stroke=1)
 
+        # Draw breath mark.
+        if note.is_breath:
+            self.c.setFont("Helvetica-BoldOblique", 7)
+            # Draw a small letter R in italic to represent the breath mark.
+            # This R should be placed right of the note,
+            # and slightly below the note name, so it doesn't overlap with the valves.
+            self.c.drawString(x + 12, y + 28, "R")
+
         # Connection arc with clipping logic.
         if note.is_connected:
             self.c.saveState()
