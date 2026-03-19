@@ -1,10 +1,23 @@
+from enum import Enum, auto
 from typing import List
 
 
+class NoteDuration(Enum):
+    SHORT = auto()
+    NORMAL = auto()
+    LONG = auto()
+
+
 class Note:
-    def __init__(self, name: str, duration: str = "normal"):
+    def __init__(
+        self,
+        name: str,
+        duration: NoteDuration = NoteDuration.NORMAL,
+        is_connected: bool = False,
+    ):
         self.name = name
-        self.duration = duration.strip().lower()
+        self.duration = duration
+        self.is_connected = is_connected
 
 
 class Part:

@@ -4,7 +4,7 @@ from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import A4
 from reportlab.lib.colors import HexColor, black, Color
 from bombardinha.core.constants import NOTES_TO_VALVES_MAP
-from bombardinha.core.models import Note, Sheet
+from bombardinha.core.models import NoteDuration, Note, Sheet
 
 
 class EuphoniumRenderer:
@@ -84,12 +84,17 @@ class EuphoniumRenderer:
             fill = 1 if pressed == 1 else 0
             self.c.circle(v_x, v_y, radius, stroke=1, fill=fill)
 
-        if note.duration == "long":
+        if note.duration == NoteDuration.LONG:
             self.c.setLineWidth(1.2)
             self.c.line(x - 8, y + 32, x + 8, y + 32)
             self.c.setLineWidth(1)
-        elif note.duration == "short":
+        elif note.duration == NoteDuration.SHORT:
             self.c.circle(x, y + 31, 1, fill=1, stroke=1)
+
+        if note.is_connected:
+            self.c.setLineWidth(1.2)
+            self.c.arc(x + 19, y + 34, x + 39, y + 46, startAng=0, extent=180)
+            self.c.setLineWidth(1)
 
     def render_sheet(self, sheet: Sheet) -> None:
         self.draw_title()
@@ -117,7 +122,7 @@ class EuphoniumRenderer:
                 self.margin, rect_y, available_width, part_height, fill=1, stroke=1
             )
 
-            self.c.setFont("Helvetica-Bold", 8)
+            self.c.setFont("Helvetica-Bold", 9)
             self.c.setFillColor(black)
             label_text = (
                 f"{part.name} ({part.repetition}x)"
