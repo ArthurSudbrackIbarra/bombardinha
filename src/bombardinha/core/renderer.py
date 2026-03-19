@@ -64,7 +64,9 @@ class EuphoniumRenderer:
         self.c.setFillColor(black)
         self.c.drawCentredString(self.width / 2, self.height - 40, self.title)
 
-    def draw_note_block(self, note: Note, x: float, y: float) -> None:
+    def draw_note_block(
+        self, note: Note, x: float, y: float, is_last: bool = False
+    ) -> None:
         self.c.setFont("Helvetica-Bold", 12)
         self.c.setFillColor(black)
         self.c.setStrokeColor(black)
@@ -93,7 +95,10 @@ class EuphoniumRenderer:
 
         if note.is_connected:
             self.c.setLineWidth(1.2)
-            self.c.arc(x + 19, y + 34, x + 39, y + 46, startAng=0, extent=180)
+            if not is_last:
+                self.c.arc(x + 19, y + 34, x + 39, y + 46, startAng=0, extent=180)
+            else:
+                self.c.arc(x + 12, y + 34, x + 24, y + 46, startAng=0, extent=180)
             self.c.setLineWidth(1)
 
     def render_sheet(self, sheet: Sheet) -> None:
@@ -136,7 +141,8 @@ class EuphoniumRenderer:
             for row in rows:
                 for i, note in enumerate(row):
                     note_x = self.margin + (note_step / 2) + (i * note_step)
-                    self.draw_note_block(note, note_x, row_start_y)
+                    is_last = i == len(row) - 1
+                    self.draw_note_block(note, note_x, row_start_y, is_last=is_last)
                 row_start_y -= self.row_height
 
             self.current_y -= part_height + 22
