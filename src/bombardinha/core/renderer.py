@@ -60,7 +60,7 @@ class EuphoniumRenderer:
         return assigned_color
 
     def draw_title(self) -> None:
-        self.c.setFont("Helvetica-Bold", 18)
+        self.c.setFont("Helvetica-Bold", 16)
         self.c.setFillColor(black)
         self.c.drawCentredString(self.width / 2, self.height - 40, self.title)
 
@@ -80,12 +80,14 @@ class EuphoniumRenderer:
         spacing = 9.5
         start_valve_x = x - (spacing * 1.5)
 
+        # Draw valves with special handling for the 4th valve.
         for i, pressed in enumerate(valves):
             v_x = start_valve_x + (i * spacing)
             v_y = y + 20 + (-4 if i == 3 else 0)
             fill = 1 if pressed == 1 else 0
             self.c.circle(v_x, v_y, radius, stroke=1, fill=fill)
 
+        # Draw duration indicators.
         if note.duration == NoteDuration.LONG:
             self.c.setLineWidth(1.2)
             self.c.line(x - 8, y + 32, x + 8, y + 32)
@@ -93,12 +95,17 @@ class EuphoniumRenderer:
         elif note.duration == NoteDuration.SHORT:
             self.c.circle(x, y + 31, 1, fill=1, stroke=1)
 
+        # Connection arc with clipping logic.
         if note.is_connected:
+            self.c.saveState()
+            clip_rect = self.c.beginPath()
+            clip_rect.rect(
+                self.margin, y, self.width - (2 * self.margin), self.row_height
+            )
+            self.c.clipPath(clip_rect, stroke=0, fill=0)
             self.c.setLineWidth(1.2)
-            if not is_last:
-                self.c.arc(x + 19, y + 34, x + 39, y + 46, startAng=0, extent=180)
-            else:
-                self.c.arc(x + 12, y + 34, x + 24, y + 46, startAng=0, extent=180)
+            self.c.arc(x + 19, y + 34, x + 39, y + 46, startAng=0, extent=180)
+            self.c.restoreState()
             self.c.setLineWidth(1)
 
     def render_sheet(self, sheet: Sheet) -> None:

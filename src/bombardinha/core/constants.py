@@ -1,14 +1,16 @@
+# Reference: https://catalogobandasdemusicape.wordpress.com/wp-content/uploads/2019/03/mc3a9todo-bc3a1sico-para-tuba-e-bombardino.pdf
+
 NOTES_TO_VALVES_MAP = {
-    "C0": [0, 0, 0, 0],
-    "C#0": None, # ?
-    "Db0": None, # ?
-    "D0": [1, 1, 1, 1],  # Rever [1, 0, 1, 1]?
-    "D#0": None,         # Rever [0, 1, 1, 1]?
-    "Eb0": None,         # Rever [0, 1, 1, 1]?
-    "E0": [0, 1, 1, 1],  # Rever [1, 1, 0, 1]?
-    "F0": [0, 0, 1, 1],  # Rever [1, 0, 0, 1]?
-    "F#0": [0, 1, 0, 1], # Rever [0, 1, 0, 1]?
-    "Gb0": [0, 1, 0, 1], # Rever [0, 1, 0, 1]?
+    "C0": [0, 0, 0, 0],  # Fundamental note, pedal C.
+    "C#0": None,  # Impossible.
+    "Db0": None,  # Impossible.
+    "D0": [1, 0, 1, 1],
+    "D#0": [0, 1, 1, 1],
+    "Eb0": [0, 1, 1, 1],
+    "E0": [1, 1, 0, 1],
+    "F0": [1, 0, 0, 1],
+    "F#0": [0, 1, 0, 1],
+    "Gb0": [0, 1, 0, 1],
     "G0": [0, 0, 0, 1],
     "G#0": [0, 1, 1, 0],
     "Ab0": [0, 1, 1, 0],
